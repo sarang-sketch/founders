@@ -1,0 +1,116 @@
+{
+  "project_name": "MGM Lost & Found - API Testing",
+  "base_url": "https://wiwnzfiggrijlnkmrnjx.supabase.co/rest/v1",
+  "api_key": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Indpd256ZmlnZ3Jpamxua21ybmp4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjM2NDgzNDYsImV4cCI6MjA3OTIyNDM0Nn0.bW0LwPWxPjSpRqwx6LMQsxkskvELcMvSM3aOd8yfa6c",
+  "headers": {
+    "apikey": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Indpd256ZmlnZ3Jpamxua21ybmp4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjM2NDgzNDYsImV4cCI6MjA3OTIyNDM0Nn0.bW0LwPWxPjSpRqwx6LMQsxkskvELcMvSM3aOd8yfa6c",
+    "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Indpd256ZmlnZ3Jpamxua21ybmp4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjM2NDgzNDYsImV4cCI6MjA3OTIyNDM0Nn0.bW0LwPWxPjSpRqwx6LMQsxkskvELcMvSM3aOd8yfa6c",
+    "Content-Type": "application/json",
+    "Prefer": "return=representation"
+  },
+  "endpoints": {
+    "users": {
+      "get": "/users",
+      "post": "/users",
+      "get_by_id": "/users?id=eq.{id}",
+      "update": "/users?id=eq.{id}",
+      "delete": "/users?id=eq.{id}"
+    },
+    "items": {
+      "get": "/items",
+      "post": "/items",
+      "get_by_type": "/items?type=eq.{type}",
+      "get_by_user": "/items?user_id=eq.{user_id}",
+      "update": "/items?id=eq.{id}",
+      "delete": "/items?id=eq.{id}"
+    },
+    "claim_requests": {
+      "get": "/claim_requests",
+      "post": "/claim_requests",
+      "get_by_user": "/claim_requests?owner_id=eq.{user_id}",
+      "update": "/claim_requests?id=eq.{id}"
+    }
+  },
+  "test_scenarios": [
+    {
+      "name": "Create User",
+      "method": "POST",
+      "endpoint": "/users",
+      "body": {
+        "id": "test_user_api",
+        "email": "apitest@mgm.ac.in",
+        "name": "API Test User",
+        "student_id": "APITEST001",
+        "phone": "9876543210",
+        "department": "Computer Science",
+        "year": "3rd Year",
+        "role": "STUDENT"
+      },
+      "expected_status": 201
+    },
+    {
+      "name": "Get Users",
+      "method": "GET",
+      "endpoint": "/users",
+      "expected_status": 200
+    },
+    {
+      "name": "Create Lost Item",
+      "method": "POST",
+      "endpoint": "/items",
+      "body": {
+        "id": "test_item_lost_1",
+        "user_id": "test_user_1",
+        "type": "LOST",
+        "category": "PHONE",
+        "title": "Lost iPhone Test",
+        "description": "Black iPhone 13 with case",
+        "location": "Library Building",
+        "status": "ACTIVE"
+      },
+      "expected_status": 201
+    },
+    {
+      "name": "Create Found Item",
+      "method": "POST",
+      "endpoint": "/items",
+      "body": {
+        "id": "test_item_found_1",
+        "user_id": "test_user_2",
+        "type": "FOUND",
+        "category": "PHONE",
+        "title": "Found Phone Test",
+        "description": "Black phone found",
+        "location": "Cafeteria",
+        "status": "ACTIVE"
+      },
+      "expected_status": 201
+    },
+    {
+      "name": "Get Lost Items",
+      "method": "GET",
+      "endpoint": "/items?type=eq.LOST",
+      "expected_status": 200
+    },
+    {
+      "name": "Get Found Items",
+      "method": "GET",
+      "endpoint": "/items?type=eq.FOUND",
+      "expected_status": 200
+    },
+    {
+      "name": "Create Claim Request",
+      "method": "POST",
+      "endpoint": "/claim_requests",
+      "body": {
+        "id": "test_claim_1",
+        "item_id": "test_item_found_1",
+        "owner_id": "test_user_1",
+        "finder_id": "test_user_2",
+        "status": "PENDING"
+      },
+      "expected_status": 201
+    }
+  ]
+}
+

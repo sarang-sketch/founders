@@ -1,0 +1,69 @@
+{
+  "project_name": "MGM Lost & Found Android App",
+  "description": "A campus-exclusive Android application for MGM students to report and find lost items with real-time matching and notifications",
+  "features": [
+    {
+      "name": "Authentication",
+      "description": "Google Sign-In and student registration",
+      "test_cases": [
+        "User can sign in with Google",
+        "User can register as student",
+        "Demo login works",
+        "User data is saved to Supabase"
+      ]
+    },
+    {
+      "name": "Lost Items",
+      "description": "Report and view lost items",
+      "test_cases": [
+        "User can report a lost item",
+        "User can upload photo",
+        "User can capture location",
+        "Lost items are displayed in list",
+        "Real-time updates work"
+      ]
+    },
+    {
+      "name": "Found Items",
+      "description": "Report and view found items",
+      "test_cases": [
+        "User can report a found item",
+        "Found items are displayed",
+        "Real-time updates work"
+      ]
+    },
+    {
+      "name": "Matching System",
+      "description": "Automatic matching of lost and found items",
+      "test_cases": [
+        "Items match by category",
+        "Items match by description similarity",
+        "Items match by location proximity",
+        "Users receive match notifications"
+      ]
+    },
+    {
+      "name": "Claim System",
+      "description": "Request to claim found items",
+      "test_cases": [
+        "User can create claim request",
+        "Finder receives notification",
+        "Finder can approve/reject claim",
+        "Contact sharing works after approval"
+      ]
+    }
+  ],
+  "api_endpoints": {
+    "supabase": {
+      "base_url": "https://wiwnzfiggrijlnkmrnjx.supabase.co",
+      "tables": ["users", "items", "claim_requests"]
+    }
+  },
+  "test_requirements": {
+    "database": "Supabase connection",
+    "authentication": "Firebase Google Sign-In",
+    "real_time": "Supabase real-time subscriptions",
+    "notifications": "Firebase Cloud Messaging"
+  }
+}
+

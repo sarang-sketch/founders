@@ -1,0 +1,172 @@
+{
+  "project_name": "MGM Lost & Found",
+  "project_type": "android",
+  "tech_stack": {
+    "language": "Kotlin",
+    "framework": "Android Native",
+    "build_tool": "Gradle",
+    "min_sdk": 24,
+    "target_sdk": 34,
+    "compile_sdk": 34
+  },
+  "dependencies": {
+    "firebase": {
+      "authentication": "Google Sign-In",
+      "database": "Firestore (optional)",
+      "storage": "Firebase Storage",
+      "messaging": "Firebase Cloud Messaging"
+    },
+    "supabase": {
+      "database": "PostgreSQL with real-time",
+      "storage": "Supabase Storage",
+      "realtime": "Enabled"
+    },
+    "ui_libraries": [
+      "Material Components",
+      "AndroidX",
+      "Glide (image loading)",
+      "ZXing (QR codes)",
+      "CameraX"
+    ],
+    "other": [
+      "Google Play Services (Maps, Location)",
+      "Retrofit (networking)",
+      "Coroutines"
+    ]
+  },
+  "features": [
+    {
+      "name": "Authentication",
+      "description": "Google Sign-In and student registration",
+      "screens": ["LoginActivity", "RegistrationActivity", "SplashActivity"],
+      "components": ["AuthRepository", "HybridRepository"]
+    },
+    {
+      "name": "Lost Items",
+      "description": "Report and view lost items",
+      "screens": ["LostItemsFragment", "ReportItemActivity", "ItemDetailActivity"],
+      "components": ["ItemRepository", "ItemAdapter"]
+    },
+    {
+      "name": "Found Items",
+      "description": "Report and view found items",
+      "screens": ["FoundItemsFragment", "ReportItemActivity", "ItemDetailActivity"],
+      "components": ["ItemRepository", "ItemAdapter"]
+    },
+    {
+      "name": "My Reports",
+      "description": "View user's own reported items",
+      "screens": ["MyReportsFragment"],
+      "components": ["ItemRepository"]
+    },
+    {
+      "name": "Profile",
+      "description": "User profile information",
+      "screens": ["ProfileFragment"],
+      "components": []
+    },
+    {
+      "name": "Claim System",
+      "description": "Request to claim found items",
+      "screens": ["ClaimRequestActivity"],
+      "components": ["ClaimRepository"]
+    },
+    {
+      "name": "Admin Dashboard",
+      "description": "Admin management of all reports",
+      "screens": ["AdminDashboardActivity"],
+      "components": []
+    },
+    {
+      "name": "Real-time Matching",
+      "description": "Automatic matching of lost and found items",
+      "screens": [],
+      "components": ["MatchingRepository"]
+    },
+    {
+      "name": "Notifications",
+      "description": "Push notifications for matches and claims",
+      "screens": [],
+      "components": ["NotificationService", "NotificationHelper"]
+    }
+  ],
+  "database": {
+    "primary": "Supabase (PostgreSQL)",
+    "secondary": "Firebase Firestore (optional)",
+    "tables": [
+      {
+        "name": "users",
+        "fields": ["id", "email", "name", "student_id", "phone", "department", "year", "role", "profile_image_url", "created_at"]
+      },
+      {
+        "name": "items",
+        "fields": ["id", "user_id", "type", "category", "title", "description", "location", "latitude", "longitude", "photo_urls", "serial_number", "reward", "qr_code", "status", "matched_items", "claim_request_id", "contact_shared", "finder_info", "created_at", "updated_at"]
+      },
+      {
+        "name": "claim_requests",
+        "fields": ["id", "item_id", "owner_id", "finder_id", "status", "owner_contact_shared", "finder_contact_shared", "created_at"]
+      }
+    ],
+    "realtime": true
+  },
+  "api_endpoints": {
+    "supabase": {
+      "base_url": "https://wiwnzfiggrijlnkmrnjx.supabase.co",
+      "tables": ["users", "items", "claim_requests"]
+    },
+    "firebase": {
+      "authentication": "Google Sign-In",
+      "storage": "Firebase Storage",
+      "messaging": "FCM"
+    }
+  },
+  "permissions": [
+    "INTERNET",
+    "ACCESS_NETWORK_STATE",
+    "CAMERA",
+    "READ_EXTERNAL_STORAGE",
+    "WRITE_EXTERNAL_STORAGE",
+    "ACCESS_FINE_LOCATION",
+    "ACCESS_COARSE_LOCATION",
+    "POST_NOTIFICATIONS",
+    "VIBRATE"
+  ],
+  "main_activities": [
+    "SplashActivity",
+    "LoginActivity",
+    "RegistrationActivity",
+    "MainActivity",
+    "ReportItemActivity",
+    "ItemDetailActivity",
+    "ClaimRequestActivity",
+    "AdminDashboardActivity"
+  ],
+  "fragments": [
+    "LostItemsFragment",
+    "FoundItemsFragment",
+    "MyReportsFragment",
+    "ProfileFragment"
+  ],
+  "services": [
+    "NotificationService"
+  ],
+  "repositories": [
+    "AuthRepository",
+    "ItemRepository",
+    "ClaimRepository",
+    "MatchingRepository",
+    "HybridRepository",
+    "SupabaseRepository"
+  ],
+  "testing_requirements": {
+    "authentication": "Google Sign-In flow, demo login",
+    "crud_operations": "Create/Read/Update items, users, claims",
+    "real_time": "Real-time updates from Supabase",
+    "notifications": "Push notification handling",
+    "location": "GPS location capture",
+    "camera": "Photo capture and upload",
+    "matching": "Item matching algorithm",
+    "ui_flows": "Navigation between screens"
+  }
+}
+
